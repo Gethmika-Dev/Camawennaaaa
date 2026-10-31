@@ -1899,6 +1899,18 @@ body {
     object-fit: contain;
 }
 
+.final-video-caption {
+    font-family: var(--font-handwritten);
+    font-size: clamp(1.4rem, 3.8vw, 1.9rem);
+    font-weight: 600;
+    color: var(--burgundy);
+    text-align: center;
+    margin: 0.2rem 0 0.4rem;
+    letter-spacing: 0.3px;
+    user-select: none;
+    line-height: 1.3;
+}
+
 .video-replay-btn {
     padding: 0.65rem 1.6rem;
     border-radius: 30px;
