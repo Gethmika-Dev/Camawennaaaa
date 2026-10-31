@@ -661,35 +661,13 @@ body {
     min-height: 90dvh;
     width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     padding: 3rem 1.5rem 5rem;
     position: relative;
     z-index: 7;
-}
-
-/* Three centered icons directly above card */
-.card-top-icons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1.15rem;
-    margin-bottom: 0.95rem;
-    color: #8C1C28;
-    user-select: none;
-}
-
-.card-top-star {
-    font-size: 1.15rem;
-    color: #8C1C28;
-    line-height: 1;
-}
-
-.card-top-heart {
-    font-size: 1.35rem;
-    color: #8C1C28;
-    line-height: 1;
-    font-weight: 300;
+    margin: 0 auto;
 }
 
 /* Soft, rounded rectangular card matching uploaded color */
@@ -701,6 +679,7 @@ body {
     padding: 3.2rem 4rem;
     max-width: 690px;
     width: 92%;
+    margin: 0 auto;
     box-shadow: 
         0 12px 30px rgba(145, 100, 75, 0.15),
         0 3px 8px rgba(145, 100, 75, 0.08);
