@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>A Little Gift For You 🤍</title>
+    <meta name="description" content="A heartfelt little gift, made with love.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎁</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Caveat:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Seamless background audio (hidden, loops continuously, starts on gift click) -->
+    <audio id="bg-music" src="assets/bg-music.mp3" preload="auto" loop></audio>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  GIFT OPENING PAGE & FLOWER RAIN                       -->
+    <!--  Warm cream background, gift illustration, heading     -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div id="gift-page" class="gift-page" role="main" aria-label="A little gift for you">
+
+        <!-- Gift & text wrapper that smoothly fades out on click -->
+        <div class="first-page-content" id="first-page-content">
+            <!-- Gift illustration -->
+            <div class="gift-wrapper" id="gift-wrapper" tabindex="0" role="button" aria-label="Open the gift">
+                <div class="gift-glow" aria-hidden="true"></div>
+                <img 
+                    src="assets/gift-box.png" 
+                    alt="A hand-drawn red and white gift box" 
+                    class="gift-image" 
+                    id="gift-image"
+                    draggable="false"
+                >
+            </div>
+
+            <!-- Main heading -->
+            <h1 class="gift-heading">For you, my Princess.</h1>
+
+            <!-- Tap to open hint -->
+            <p class="gift-hint" id="gift-hint">(tap to open)</p>
+        </div>
+
+        <!-- Sparkle / heart particles container -->
+        <div class="particles-container" id="particles-container" aria-hidden="true"></div>
+
+        <!-- Flower Rain Container -->
+        <div id="flower-container" aria-hidden="true"></div>
+
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  SECTION 2 — "FROM ME TO YOU"                          -->
+    <!--  Revealed as flowers part in the middle                -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="from-me-to-you" class="from-me-section" aria-label="From me to you">
+
+        <!-- Dried roses positioned in the top-left corner -->
+        <img 
+            src="assets/Gemini_Generated_Image_eat0kreat0kreat0-removebg-preview.png" 
+            alt="Dried roses hanging decoration" 
+            class="dried-roses-decor"
+            draggable="false"
+        >
+
+        <!-- Main centered content -->
+        <div class="from-me-content">
+            <p class="from-me-tag">From me to you 🤍</p>
+            <h2 class="love-heading">I'm Sorry Cuduuuuuuuuu 😘.</h2>
+
+            <!-- Couple illustration centered directly below the text -->
+            <div class="couple-wrapper">
+                <img 
+                    src="assets/Gemini_Generated_Image_fibrj8fibrj8fibr__1_-removebg-preview.png" 
+                    alt="Couple illustration" 
+                    class="couple-illustration"
+                    draggable="false"
+                >
+            </div>
+
+            <!-- Row of three small centered icons: dark red 4-point star, heart outline, 4-point star -->
+            <div class="love-icons-row" aria-hidden="true">
+                <svg class="love-icon love-star" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C12 6.627 17.373 12 24 12C17.373 12 12 17.373 12 24C12 17.373 6.627 12 0 12C6.627 12 12 6.627 12 0Z"/>
+                </svg>
+                <svg class="love-icon love-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                <svg class="love-icon love-star" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0C12 6.627 17.373 12 24 12C17.373 12 12 17.373 12 24C12 17.373 6.627 12 0 12C6.627 12 12 6.627 12 0Z"/>
+                </svg>
+            </div>
+
+            <!-- Gentle scroll hint -->
+            <div class="scroll-prompt" aria-hidden="true">
+                <span>scroll down</span>
+                <span class="scroll-prompt-arrow">↓</span>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!--  SECTION 3 — ROMANTIC QUOTE CARD                        -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <div class="quote-card-section">
+
+            <!-- Three centered icons directly above card: star, heart, star -->
+            <div class="card-top-icons" aria-hidden="true">
+                <span class="card-top-star">✦</span>
+                <span class="card-top-heart">♡</span>
+                <span class="card-top-star">✦</span>
+            </div>
+
+            <!-- Soft rounded rectangular card exactly matching reference -->
+            <div class="romantic-quote-card">
+                <!-- Top-Left floating pink heart -->
+                <svg class="corner-shape shape-heart shape-tl" viewBox="0 0 24 24" fill="#DF979F" aria-hidden="true">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+
+                <!-- Top-Right green flower/clover -->
+                <svg class="corner-shape shape-flower shape-tr" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="7" r="3.2" fill="#98B899"/>
+                    <circle cx="17" cy="12" r="3.2" fill="#98B899"/>
+                    <circle cx="12" cy="17" r="3.2" fill="#98B899"/>
+                    <circle cx="7" cy="12" r="3.2" fill="#98B899"/>
+                    <circle cx="12" cy="12" r="2.8" fill="#88A889"/>
+                </svg>
+
+                <!-- Bottom-Left subtle warm sparkle star -->
+                <svg class="corner-shape shape-sparkle shape-bl" viewBox="0 0 24 24" fill="#DEB89A" aria-hidden="true">
+                    <path d="M12 2C12 7.5 16.5 12 22 12C16.5 12 12 16.5 12 22C12 16.5 7.5 12 2 12C7.5 12 12 7.5 12 2Z"/>
+                </svg>
+
+                <!-- Bottom-Right floating pink heart -->
+                <svg class="corner-shape shape-heart shape-br" viewBox="0 0 24 24" fill="#DF979F" aria-hidden="true">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                </svg>
+
+                <!-- Quote text with exact word highlights and italic handwriting -->
+                <p class="quote-line">
+                    In your <span class="highlight-box highlight-smile"><span class="highlight-text-smile">smile</span></span>, I found my <span class="highlight-box highlight-peace"><span class="highlight-text-peace">peace</span></span>.
+                </p>
+                <p class="quote-line">
+                    In your <span class="highlight-box highlight-love"><span class="highlight-text-love">love</span></span>, I found my <span class="highlight-box highlight-home"><span class="highlight-text-home">home</span></span>.
+                </p>
+            </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <!--  SECTION 4 — PIXEL HEART PADLOCK & PASSKEY KEYPAD       -->
+        <!-- ═══════════════════════════════════════════════════════ -->
+        <div class="padlock-section" id="padlock-section">
+
+            <!-- Container holding both padlock and keypad on the exact same page -->
+            <div class="padlock-stage">
+
+                <!-- Initial state: Pixel-art heart padlock + "tap to open" -->
+                <div class="padlock-trigger" id="padlock-trigger" tabindex="0" role="button" aria-label="Tap to open padlock">
+                    <div class="pixel-padlock-wrap" aria-hidden="true">
+                        <img 
+                            src="assets/pixel-heart-padlock.png" 
+                            alt="Pixel heart padlock" 
+                            class="pixel-padlock-img"
+                            draggable="false"
+                        >
+                        <div class="pixel-padlock-shadow"></div>
+                    </div>
+                    <p class="padlock-hint">tap to open</p>
+                </div>
+
+                <!-- In-place hidden keypad interface (fades in smoothly when padlock is clicked) -->
+                <div class="keypad-card" id="keypad-card" aria-hidden="true">
+                    
+                    <!-- Top lock with faint concentric background rings -->
+                    <div class="keypad-top-lock-area" aria-hidden="true">
+                        <div class="concentric-ring ring-outer"></div>
+                        <div class="concentric-ring ring-inner"></div>
+                        <img 
+                            src="assets/pixel-heart-padlock.png" 
+                            alt="Padlock" 
+                            class="keypad-padlock-mini"
+                            draggable="false"
+                        >
+                    </div>
+
+                    <h3 class="keypad-title">Enter Passkey</h3>
+
+                    <!-- Four indicator circles connected with line -->
+                    <div class="passkey-indicators-wrap">
+                        <div class="indicators-track-line" aria-hidden="true"></div>
+                        <div class="passkey-indicators" id="passkey-indicators">
+                            <span class="indicator-circle"></span>
+                            <span class="indicator-circle"></span>
+                            <span class="indicator-circle"></span>
+                            <span class="indicator-circle"></span>
+                        </div>
+                    </div>
+
+                    <!-- Circular numeric keypad buttons 0-9 & Clear matching exact layout -->
+                    <div class="keypad-grid">
+                        <button type="button" class="keypad-btn" data-key="1">1</button>
+                        <button type="button" class="keypad-btn" data-key="2">2</button>
+                        <button type="button" class="keypad-btn" data-key="3">3</button>
+
+                        <button type="button" class="keypad-btn" data-key="4">4</button>
+                        <button type="button" class="keypad-btn" data-key="5">5</button>
+                        <button type="button" class="keypad-btn" data-key="6">6</button>
+
+                        <button type="button" class="keypad-btn" data-key="7">7</button>
+                        <button type="button" class="keypad-btn" data-key="8">8</button>
+                        <button type="button" class="keypad-btn" data-key="9">9</button>
+
+                        <div class="keypad-spacer" aria-hidden="true"></div>
+                        <button type="button" class="keypad-btn" data-key="0">0</button>
+                        <button type="button" class="keypad-btn keypad-clear-btn" data-action="clear">Clear</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  ROTATING ROSE WREATH LOADING SCREEN                    -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div id="rose-wreath-loader" class="rose-wreath-screen" aria-hidden="true">
+        <div class="wreath-wrapper">
+            <div class="rose-wreath-ring">
+                <!-- 10 Alternating pink and white watercolor roses in a circular wreath -->
+                <img src="assets/flowers/Gemini_Generated_Image_v1xz1dv1xz1dv1xz-removebg-preview.png" alt="" class="wreath-rose" style="--angle: 0deg;" draggable="false">
+                <img src="assets/flowers/Gemini_Generated_Image_831frq831frq831f-removebg-preview.png" alt="" class="wreath-rose" style="--angle: 36deg;" draggable="false">
+                <img src="assets/flowers/Gemini_Generated_Image_v1xz1dv1xz1dv1xz-removebg-preview.png" alt="" class="wreath-rose" style="--angle: 72deg;" draggable="false">
+                <img src="assets/flowers/Gemini_Generated_Image_831frq831frq831f-removebg-preview.png" alt="" class="wreath-rose" style="--angle: 108deg;" draggable="false">
+                <img src="assets/flowers/Gemini_Generated_Image_v1xz1dv1xz1dv1xz-removebg-preview.png" alt="" class="wreath-rose" style="--angle: 144deg;" draggable="false">
+                <img src="assets/flowers/Gemini_Generated_Image_831frq831frq831f-removebg-preview.png" alt="" class="wreath-rose" style="--angle: 180deg;" draggable="false">
+                <img src="assets/flowers/Gemini_Generated_Image_v1xz1dv1xz1dv1xz-removebg-preview.png" alt="" class="wreath-rose" style="--angle: 216deg;" draggable="false">
+                <img src="assets/flowers/Gemini_Generated_Image_831frq831frq831f-removebg-preview.png" alt="" class="wreath-rose" style="--angle: 252deg;" draggable="false">
+                <img src="assets/flowers/Gemini_Generated_Image_v1xz1dv1xz1dv1xz-removebg-preview.png" alt="" class="wreath-rose" style="--angle: 288deg;" draggable="false">
+                <img src="assets/flowers/Gemini_Generated_Image_831frq831frq831f-removebg-preview.png" alt="" class="wreath-rose" style="--angle: 324deg;" draggable="false">
+            </div>
+            <p class="wreath-loading-text">LOADING</p>
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  SECTION 5 — FRESH EMPTY PAGE                           -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div id="fresh-empty-page" class="fresh-empty-page" aria-hidden="true"></div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  SECTION 6 — ROMANTIC QUESTION ("BE MY POOKIE?")        -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="pookie-question-section" class="pookie-section" aria-label="Be my Pookie question" aria-hidden="true">
+        <div class="pookie-content">
+            
+            <!-- Flork sticker centered at the top -->
+            <div class="flork-sticker-wrapper">
+                <img 
+                    src="assets/flork_Whatsapp_sticker-removebg-preview.png" 
+                    alt="Cute Flork sticker with roses" 
+                    class="flork-sticker-img"
+                    draggable="false"
+                >
+            </div>
+
+            <!-- Question text with cute emojis -->
+            <h2 class="pookie-question-title">
+                Oya math ekka yalui nedaaa ? 🥺👉👈
+            </h2>
+
+            <!-- Interactive Yes / No buttons -->
+            <div class="pookie-btn-group" id="pookie-btn-group">
+                <button type="button" class="pookie-btn pookie-btn-yes" id="pookie-btn-yes">
+                    Yes 💖
+                </button>
+                <button type="button" class="pookie-btn pookie-btn-no" id="pookie-btn-no">
+                    No
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  SECTION 7 — GIF INTERLUDE ("gigitin.gif")              -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div id="gif-transition-screen" class="gif-transition-screen" aria-hidden="true">
+        <div class="gif-wrapper">
+            <img 
+                src="assets/gigitin.gif" 
+                alt="Cute animated scene" 
+                class="animated-transition-gif"
+                draggable="false"
+            >
+        </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  SECTION 8 — "OYATA MOKADDA ONE?" QUESTION SECTION      -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="wants-question-section" class="wants-section" aria-label="Oyata mokadda one question" aria-hidden="true">
+        <div class="wants-content">
+            
+            <!-- Cute cat paws heart sticker centered at top -->
+            <div class="kitty-sticker-wrapper">
+                <img 
+                    src="assets/Cutie_kitty__-removebg-preview.png" 
+                    alt="Cute kitty paws heart" 
+                    class="kitty-sticker-img"
+                    draggable="false"
+                >
+            </div>
+
+            <!-- Question text -->
+            <h2 class="wants-question-title">
+                Oyata mokadda one? 🥺💖
+            </h2>
+
+            <!-- Three Option Buttons -->
+            <div class="wants-options-group">
+                <button type="button" class="wants-btn" data-choice="hug">
+                    Thurul karagan 🫂
+                </button>
+                <button type="button" class="wants-btn" data-choice="kiss">
+                    Umma ekak 💋
+                </button>
+                <button type="button" class="wants-btn wants-btn-highlight" data-choice="both">
+                    Thurul karagena umma ekak 🫂💋
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  SECTION 9 — FINAL SWEET LOVE MESSAGE SECTION           -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="final-love-section" class="final-love-section" aria-label="Final love message" aria-hidden="true">
+        <div class="final-love-content">
+            
+            <!-- Shy cute cat sticker centered at the top -->
+            <div class="shy-cat-wrapper">
+                <img 
+                    src="assets/download__6_-removebg-preview.png" 
+                    alt="Shy blushing kitty" 
+                    class="shy-cat-img"
+                    draggable="false"
+                >
+            </div>
+
+            <!-- Sweet final romantic message -->
+            <h2 class="final-love-title" id="final-love-title">
+                Mage sudu baththeta godaaaak adarei! 🥰💖
+            </h2>
+            <p class="final-love-text" id="final-love-text">
+                Godak adarei mage pookie.. godaaak thurul karagena umma godaaaaak dennam! 🫂💋🥰❤️
+            </p>
+
+            <div class="final-hearts-row" aria-hidden="true">
+                <span>🤍</span>
+                <span>💖</span>
+                <span>✨</span>
+                <span>💖</span>
+                <span>🤍</span>
+            </div>
+
+            <!-- Transition to letter button -->
+            <div class="final-love-btn-wrapper" style="margin-top: 1.6rem;">
+                <button type="button" class="wants-btn wants-btn-highlight" id="to-letter-btn">
+                    Mage Raththaran Wenuwen... 💌
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  SECTION 10 — HEART-FELT LETTER SECTION                 -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <section id="letter-section" class="letter-section" aria-label="Heart-felt letter section" aria-hidden="true">
+        <div class="letter-content-wrapper">
+            
+            <!-- Cute kitten sticking tongue out centered at the top -->
+            <div class="letter-kitten-wrapper">
+                <img 
+                    src="assets/cute_kitten-removebg-preview.png" 
+                    alt="Cute silly kitten sticker" 
+                    class="letter-kitten-img"
+                    draggable="false"
+                >
+            </div>
+
+            <!-- Letter Card -->
+            <div class="letter-card">
+                <div class="letter-badge" aria-hidden="true">💌 A little note for you</div>
+                <h2 class="letter-title">අක්කේ... ❤️</h2>
+                <div class="letter-body">
+                    <p>
+                        මම මේ ලියුම ලියන්නේ ඇත්තටම මගේ අතින් වුණු වරදට මගේ මුළු හදවතින්ම සමාව ඉල්ලන්න. මම දන්නවා මගේ සමහර වැඩ නිසා ඔයාගේ හිත ගොඩක් රිදුණා කියලා. එදා මම කරපු දේ වැරදියි තමයි, ඒත් ඒකෙන් oyata රිද්දන්න මට කිසිම උවමනාවක් තිබුණේ නැහැ අක්කේ. ඔයා මත් එක්ක තරහ වෙලා ඉන්නකොට, මගේ මැසේජ් seen කරන්නේ නැතුව ඉන්නකොට මට මාරම අවුල්. පිස්සු වගේ මට.
+                    </p>
+                    <p>
+                        මම pit ekata eda gahuwe, oyata sidei kiyala hithuwe nh. මට ඉන්න එකම අක්කා ඔයානේ. මගේ එකම ලෝකය, මගේ පණ වගේ පරිස්සම් කරගන්න ඕන එකම කෙනත් ඔයා තමයි.
+                    </p>
+                    <p>
+                        ඔයා doctor kenek wenna kochcharaමහන්සි වෙනවද කියලා මම හොඳටම දන්නවා. ඒ අස්සේ මම මෝඩ වැඩ කරලා oyata ridduwanam මට මාවම සමා වෙන්න බැහැ. මගේ අතින් වුණු ඒ මෝඩ කමට මට සමාව දෙන්නකෝ අම්මේ... අනේ මගේ චූටි නෝනා පැටියෝ, ඒ තරහ අමතක කරලා ආයෙමත් මාත් එක්ක ඉස්සර වගේ කතා කරන්නකෝ.
+                    </p>
+                    <p>
+                        ඔයාගේ පුංචි මල්ලිගෙන් වුණු වැරැද්දට මට සමාව දීලා, ආයෙමත් යාළු වෙමුද මැණික?
+                    </p>
+                    <p class="letter-sign-off">
+                        ඔයාට ආදරෙයි! 🫂🫶🥰🌹😘❤️
+                    </p>
+                </div>
+
+                <!-- 'Last one' button at the bottom of the letter -->
+                <div class="letter-btn-wrapper">
+                    <button type="button" class="last-one-btn" id="last-one-btn">
+                        Last one ✨
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <!--  SECTION 11 — FINAL FULL-VIEW VIDEO SECTION             -->
+    <!-- ═══════════════════════════════════════════════════════ -->
+    <div id="video-section" class="video-section" aria-label="Final video overlay" aria-hidden="true">
+        <div class="video-wrapper">
+            <video 
+                id="final-video" 
+                class="final-video-player" 
+                playsinline 
+                loop
+                preload="auto"
+            >
+                <source src="assets/final_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <button type="button" class="video-replay-btn" id="video-replay-btn" aria-label="Replay video">
+                Replay 🔄
+            </button>
+        </div>
+    </div>
+
+    <!-- Supabase JS Client & Config -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
