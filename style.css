@@ -1900,15 +1900,16 @@ body {
 }
 
 .final-video-caption {
-    font-family: var(--font-handwritten);
-    font-size: clamp(1.4rem, 3.8vw, 1.9rem);
-    font-weight: 600;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-size: clamp(1.2rem, 3.2vw, 1.55rem);
+    font-weight: 500;
     color: var(--burgundy);
     text-align: center;
-    margin: 0.2rem 0 0.4rem;
-    letter-spacing: 0.3px;
+    margin: 0.3rem 0 0.5rem;
+    letter-spacing: 1px;
     user-select: none;
-    line-height: 1.3;
+    line-height: 1.4;
+    opacity: 0.95;
 }
 
 .video-replay-btn {
