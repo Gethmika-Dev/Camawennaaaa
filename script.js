@@ -579,6 +579,9 @@
     // ════════════════════════════════════════════════════════
     const toLetterBtn    = document.getElementById('to-letter-btn');
     const letterSection  = document.getElementById('letter-section');
+    const letterCard1    = document.getElementById('letter-card-1');
+    const letterCard2    = document.getElementById('letter-card-2');
+    const letterNextBtn  = document.getElementById('letter-next-btn');
     const lastOneBtn     = document.getElementById('last-one-btn');
     const videoSection   = document.getElementById('video-section');
     const finalVideo     = document.getElementById('final-video');
@@ -616,6 +619,38 @@
         toLetterBtn.addEventListener('click', function (e) {
             e.preventDefault();
             transitionToLetter();
+        });
+    }
+
+    // Two-page letter navigation: Page 1 -> Page 2
+    if (letterNextBtn && letterCard1 && letterCard2) {
+        letterNextBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Save interaction to Supabase
+            saveSupabaseResponse('Letter Section', 'Clicked Next Page 💌 (To Chuti Nona)');
+
+            // Smoothly fade out Page 1
+            letterCard1.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            letterCard1.style.opacity = '0';
+            letterCard1.style.transform = 'scale(0.95)';
+
+            setTimeout(function () {
+                letterCard1.style.display = 'none';
+
+                // Display Page 2
+                letterCard2.style.display = 'flex';
+                void letterCard2.offsetWidth;
+
+                letterCard2.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                letterCard2.style.opacity = '1';
+                letterCard2.style.transform = 'scale(1)';
+
+                // Scroll smoothly to top of letter section
+                if (letterSection) {
+                    letterSection.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }, 400);
         });
     }
 
