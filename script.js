@@ -665,6 +665,21 @@
         lastOneBtn.addEventListener('click', function (e) {
             e.preventDefault();
 
+            // Pre-start video play inside user gesture so browsers never block it
+            if (finalVideo) {
+                finalVideo.currentTime = 0;
+                finalVideo.muted = false;
+                finalVideo.volume = 1.0;
+                const p = finalVideo.play();
+                if (p !== undefined) {
+                    p.catch(function () {
+                        // Fallback: if browser blocks unmuted sound, mute and play
+                        finalVideo.muted = true;
+                        finalVideo.play().catch(function () {});
+                    });
+                }
+            }
+
             // Smoothly fade out background music so only the video sound plays
             const bgMusic = document.getElementById('bg-music');
             if (bgMusic && !bgMusic.paused) {
@@ -698,19 +713,25 @@
                     videoSection.classList.add('active');
                     videoSection.setAttribute('aria-hidden', 'false');
 
-                    if (finalVideo) {
-                        finalVideo.muted = false;
-                        finalVideo.volume = 1.0;
-                        finalVideo.currentTime = 0;
-                        const playPromise = finalVideo.play();
-                        if (playPromise !== undefined) {
-                            playPromise.catch(function (err) {
-                                console.log('Autoplay handled:', err);
-                            });
-                        }
+                    if (finalVideo && finalVideo.paused) {
+                        finalVideo.play().catch(function () {
+                            finalVideo.muted = true;
+                            finalVideo.play().catch(function () {});
+                        });
                     }
                 }
             }, 600);
+        });
+    }
+
+    // Video tap-to-toggle play/pause
+    if (finalVideo) {
+        finalVideo.addEventListener('click', function () {
+            if (finalVideo.paused) {
+                finalVideo.play();
+            } else {
+                finalVideo.pause();
+            }
         });
     }
 
