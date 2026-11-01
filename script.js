@@ -770,6 +770,14 @@
         });
     }
 
+    // WhatsApp click button
+    const whatsappBtn = document.getElementById('whatsapp-click-btn');
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', function () {
+            saveSupabaseResponse('Final Page', 'Clicked "Click this" -> Opening WhatsApp to 94757133853');
+        });
+    }
+
     // Video replay button
     if (videoReplayBtn && finalVideo) {
         videoReplayBtn.addEventListener('click', function (e) {
