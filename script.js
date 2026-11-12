@@ -788,4 +788,179 @@
         });
     }
 
+    // ════════════════════════════════════════════════════════
+    //  Synced Lyrics Blur Interlude (Chorus 0:57 - 1:34)
+    // ════════════════════════════════════════════════════════
+    const lyricsOverlay   = document.getElementById('lyrics-interlude-overlay');
+    const lyricsLine1     = document.getElementById('lyrics-line-1');
+    const lyricsSubline1  = document.getElementById('lyrics-subline-1');
+    const lyricsParticles = document.getElementById('lyrics-particles');
+    const bgMusicElem     = document.getElementById('bg-music');
+
+    let lyricsInterludePlayed = false;
+    let isLyricsActive = false;
+    let currentLyricsIndex = -1;
+    let pausedAutoAdvanceTimer = false;
+
+    // Line-by-line synced lyrics data for Chorus (0:57 - 1:34)
+    const lyricsSegments = [
+        {
+            start: 57.0,
+            end: 62.9,
+            line: 'කවුරුත් ළඟ නැති කාලයේ... 🤍',
+            subline: 'නුඹ මගෙ ළඟ රැඳුනා ✨'
+        },
+        {
+            start: 63.0,
+            end: 69.9,
+            line: 'උණුහුම සයුරට පා කළේ...',
+            subline: 'දැන දැන අපි බැඳුනා 🫂'
+        },
+        {
+            start: 70.0,
+            end: 76.9,
+            line: 'නිවුනා නුඹ හින්දා... 🌸',
+            subline: 'මේ සසරේ හමුවීලා 🤍'
+        },
+        {
+            start: 77.0,
+            end: 82.9,
+            line: 'උන්නා පපුවේ මා...',
+            subline: 'සැනසිලා 🥰💖'
+        },
+        {
+            start: 83.0,
+            end: 89.9,
+            line: 'හිතුනා දෛවේ නෑ...',
+            subline: 'මේ ආලේ ලියවීලා ✨'
+        },
+        {
+            start: 90.0,
+            end: 94.8,
+            line: 'රිදුනා මතකේ ඈ...',
+            subline: 'නැවතිලා ❤️🩹'
+        }
+    ];
+
+    // Spawn subtle floating particles / glowing symbols inside lyrics overlay
+    function initLyricsParticles() {
+        if (!lyricsParticles || lyricsParticles.children.length > 0) return;
+        const symbols = ['✨', '🤍', '🌸', '💫', '🌷', '♡'];
+        const count = 18;
+        for (let i = 0; i < count; i++) {
+            const span = document.createElement('span');
+            span.className = 'lyrics-particle';
+            span.textContent = symbols[i % symbols.length];
+            span.style.left = `${Math.random() * 94 + 3}%`;
+            span.style.top = `${Math.random() * 85 + 5}%`;
+            span.style.animationDelay = `${(Math.random() * 4).toFixed(2)}s`;
+            span.style.animationDuration = `${(3.5 + Math.random() * 2.5).toFixed(2)}s`;
+            lyricsParticles.appendChild(span);
+        }
+    }
+
+    function renderLyricsSegment(idx) {
+        if (currentLyricsIndex === idx) return;
+        currentLyricsIndex = idx;
+
+        if (idx === -1) {
+            if (lyricsLine1) lyricsLine1.classList.remove('visible');
+            if (lyricsSubline1) lyricsSubline1.classList.remove('visible');
+            return;
+        }
+
+        const data = lyricsSegments[idx];
+        if (!data || !lyricsLine1 || !lyricsSubline1) return;
+
+        // Fade out slightly before swapping
+        lyricsLine1.classList.remove('visible');
+        lyricsSubline1.classList.remove('visible');
+
+        setTimeout(function () {
+            lyricsLine1.textContent = data.line;
+            lyricsSubline1.textContent = data.subline;
+
+            // Trigger reflow & fade in
+            void lyricsLine1.offsetWidth;
+            lyricsLine1.classList.add('visible');
+            lyricsSubline1.classList.add('visible');
+        }, 180);
+    }
+
+    function openLyricsInterlude() {
+        if (isLyricsActive) return;
+        isLyricsActive = true;
+        initLyricsParticles();
+
+        // Pause any active auto-advance timer on finalLoveSec so the page behind stays locked
+        if (letterTransitionTimeout) {
+            clearTimeout(letterTransitionTimeout);
+            letterTransitionTimeout = null;
+            pausedAutoAdvanceTimer = true;
+        }
+
+        if (lyricsOverlay) {
+            lyricsOverlay.classList.add('active');
+            lyricsOverlay.setAttribute('aria-hidden', 'false');
+        }
+    }
+
+    function closeLyricsInterlude() {
+        if (!isLyricsActive) return;
+        isLyricsActive = false;
+        lyricsInterludePlayed = true;
+
+        if (lyricsOverlay) {
+            lyricsOverlay.classList.remove('active');
+            lyricsOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        renderLyricsSegment(-1);
+
+        // If the love section was waiting to advance, resume it smoothly now
+        if (pausedAutoAdvanceTimer) {
+            pausedAutoAdvanceTimer = false;
+            if (finalLoveSec && finalLoveSec.classList.contains('active') && !letterSection.classList.contains('active')) {
+                letterTransitionTimeout = setTimeout(function () {
+                    transitionToLetter();
+                }, 2500);
+            }
+        }
+    }
+
+    if (bgMusicElem) {
+        bgMusicElem.addEventListener('timeupdate', function () {
+            // Never trigger lyrics interlude if the user has reached the final video section
+            if (videoSection && videoSection.classList.contains('active')) {
+                if (isLyricsActive) closeLyricsInterlude();
+                return;
+            }
+
+            const curr = bgMusicElem.currentTime;
+
+            // Trigger window: 57.0s to 94.8s (approx 1:34) and ONLY the 1st time
+            if (!lyricsInterludePlayed && curr >= 57.0 && curr <= 95.0) {
+                if (!isLyricsActive) {
+                    openLyricsInterlude();
+                }
+
+                // Find matching segment
+                let activeIdx = -1;
+                for (let i = 0; i < lyricsSegments.length; i++) {
+                    if (curr >= lyricsSegments[i].start && curr <= lyricsSegments[i].end) {
+                        activeIdx = i;
+                        break;
+                    }
+                }
+
+                if (activeIdx !== -1) {
+                    renderLyricsSegment(activeIdx);
+                }
+            } else if (isLyricsActive && (curr > 95.0 || curr < 56.0)) {
+                // Exit interlude smoothly after 1:34 or if track looped/seeked
+                closeLyricsInterlude();
+            }
+        });
+    }
+
 })();
