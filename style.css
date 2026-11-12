@@ -1713,7 +1713,11 @@ body {
     pointer-events: none;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding: 2.2rem 1.2rem 3.5rem;
+    padding: clamp(1.2rem, 3.5vh, 2.5rem) clamp(1rem, 3.5vw, 1.8rem) clamp(2.5rem, 6vh, 4rem);
+    padding-top: max(clamp(1.2rem, 3.5vh, 2.5rem), env(safe-area-inset-top));
+    padding-bottom: max(clamp(2.5rem, 6vh, 4rem), env(safe-area-inset-bottom));
+    padding-left: max(clamp(1rem, 3.5vw, 1.8rem), env(safe-area-inset-left));
+    padding-right: max(clamp(1rem, 3.5vw, 1.8rem), env(safe-area-inset-right));
     transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), visibility 0.8s ease;
 }
 
@@ -1728,109 +1732,148 @@ body {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 580px;
+    max-width: 620px;
     margin: auto 0;
+    position: relative;
+    z-index: 2;
 }
 
 .letter-kitten-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: -15px;
-    z-index: 2;
+    margin-bottom: -18px;
+    z-index: 4;
+    filter: drop-shadow(0 12px 24px rgba(123, 45, 59, 0.18));
 }
 
 .letter-kitten-img {
-    width: clamp(180px, 40vw, 250px);
+    width: clamp(160px, 36vw, 230px);
     height: auto;
     object-fit: contain;
     user-select: none;
     -webkit-user-drag: none;
-    filter: drop-shadow(0 10px 26px rgba(150, 105, 80, 0.22));
     animation: gentleFlorkFloat 4s ease-in-out infinite alternate;
 }
 
+/* ─── Premium Clear Glassmorphism Letter Card ─── */
 .letter-card {
     position: relative;
     width: 100%;
-    background: #FFFDF9;
-    border: 1.5px solid rgba(215, 175, 140, 0.6);
-    border-radius: 26px;
-    padding: 2.4rem 2rem 2.2rem;
+    max-width: 620px;
+    background: rgba(255, 255, 255, 0.32);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    border-radius: 28px;
+    padding: clamp(2rem, 4.5vw, 3rem) clamp(1.4rem, 4vw, 2.5rem) clamp(1.8rem, 4vw, 2.4rem);
     box-shadow: 
-        0 14px 36px rgba(150, 105, 80, 0.12),
-        0 2px 8px rgba(150, 105, 80, 0.06);
+        0 18px 45px rgba(123, 45, 59, 0.12),
+        0 4px 18px rgba(238, 212, 182, 0.35),
+        inset 0 1.5px 1.5px rgba(255, 255, 255, 0.85),
+        inset 0 -1px 1px rgba(255, 255, 255, 0.35);
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: hidden;
+    transition: transform 0.45s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.35s ease;
+}
+
+/* Subtle glass reflection highlight */
+.letter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 38%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.04) 100%);
+    border-radius: 28px 28px 100px 100px;
+    pointer-events: none;
 }
 
 .letter-badge {
     display: inline-block;
-    font-family: var(--font-hint);
-    font-size: 1.05rem;
-    color: #9B5D68;
-    background: #FDF1EA;
-    padding: 0.3rem 1rem;
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-hint), 'Caveat', cursive;
+    font-size: clamp(1rem, 2.6vw, 1.15rem);
+    font-weight: 600;
+    color: var(--burgundy);
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 0.35rem 1.15rem;
     border-radius: 30px;
-    margin-bottom: 1rem;
-    border: 1px dashed rgba(200, 140, 150, 0.5);
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 2px 8px rgba(123, 45, 59, 0.08);
 }
 
 .letter-title {
-    font-family: var(--font-handwritten), 'Segoe UI', 'Noto Sans Sinhala', 'Iskoola Pota', sans-serif;
-    font-size: clamp(2.1rem, 5vw, 2.9rem);
+    position: relative;
+    z-index: 1;
+    font-family: var(--font-handwritten), 'Noto Sans Sinhala', 'Playfair Display', serif;
+    font-size: clamp(2rem, 5.2vw, 2.85rem);
     font-weight: 700;
-    color: var(--burgundy);
-    margin-bottom: 1.4rem;
+    color: #4A1722;
+    margin-bottom: 1.5rem;
     line-height: 1.35;
+    text-shadow: 0 1px 2px rgba(255, 255, 255, 0.6);
 }
 
 .letter-body {
+    position: relative;
+    z-index: 1;
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 1.2rem;
+    gap: 1.25rem;
     margin-bottom: 2rem;
     text-align: left;
 }
 
 .letter-body p {
-    font-family: var(--font-hint), 'Segoe UI', 'Noto Sans Sinhala', 'Iskoola Pota', sans-serif;
-    font-size: clamp(1.1rem, 2.7vw, 1.32rem);
-    color: #4A2830;
-    line-height: 1.75;
-    letter-spacing: 0.2px;
+    font-family: 'Noto Sans Sinhala', 'Caveat', var(--font-hint), sans-serif;
+    font-size: clamp(1.1rem, 2.6vw, 1.32rem);
+    color: #381A22;
+    line-height: 1.85;
+    letter-spacing: 0.25px;
+    text-shadow: 0 0.5px 1px rgba(255, 255, 255, 0.45);
 }
 
 .letter-sign-off {
     font-weight: 600;
     color: var(--burgundy) !important;
-    font-size: clamp(1.2rem, 3vw, 1.45rem) !important;
+    font-size: clamp(1.2rem, 3.2vw, 1.5rem) !important;
     text-align: center;
-    margin-top: 0.5rem;
+    margin-top: 0.6rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.55);
 }
 
 .letter-btn-wrapper {
+    position: relative;
+    z-index: 1;
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
 .last-one-btn {
-    padding: 0.95rem 2.6rem;
+    padding: clamp(0.85rem, 2.4vw, 1rem) clamp(2.2rem, 5vw, 2.8rem);
     border-radius: 50px;
     background: linear-gradient(135deg, #F38B9B 0%, #D84B65 100%);
     color: #FFFFFF;
-    font-family: var(--font-hint);
+    font-family: var(--font-hint), 'Caveat', cursive;
     font-size: clamp(1.25rem, 3.2vw, 1.5rem);
     font-weight: 600;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
     cursor: pointer;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-    box-shadow: 0 8px 24px rgba(216, 75, 101, 0.4);
+    box-shadow: 0 8px 24px rgba(216, 75, 101, 0.38);
     transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background 0.25s ease;
 }
 
@@ -1842,6 +1885,40 @@ body {
 
 .last-one-btn:active {
     transform: scale(0.97);
+}
+
+/* Mobile Landscape & Notch optimization (e.g. iPhone X) */
+@media (max-height: 520px) and (orientation: landscape) {
+    .letter-section {
+        padding-top: max(0.8rem, env(safe-area-inset-top));
+        padding-bottom: max(1.2rem, env(safe-area-inset-bottom));
+    }
+    .letter-kitten-img {
+        width: 110px;
+    }
+    .letter-kitten-wrapper {
+        margin-bottom: -10px;
+    }
+    .letter-card {
+        padding: 1.4rem 1.4rem 1.2rem;
+        border-radius: 20px;
+    }
+    .letter-title {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+    }
+    .letter-body {
+        gap: 0.8rem;
+        margin-bottom: 1.2rem;
+    }
+    .letter-body p {
+        font-size: 1.05rem;
+        line-height: 1.6;
+    }
+    .last-one-btn {
+        padding: 0.65rem 1.8rem;
+        font-size: 1.15rem;
+    }
 }
 
 /* ══════════════════════════════════════════════════════════
