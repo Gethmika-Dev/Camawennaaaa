@@ -13,6 +13,19 @@
     --glow-color: rgba(232, 180, 160, 0.45);
     --shadow-soft: rgba(180, 120, 100, 0.15);
 
+    /* ─── Shared Premium Clear Glassmorphism System ─── */
+    --glass-bg: rgba(255, 255, 255, 0.28);
+    --glass-bg-subtle: rgba(255, 255, 255, 0.20);
+    --glass-bg-hover: rgba(255, 255, 255, 0.38);
+    --glass-border: rgba(255, 255, 255, 0.65);
+    --glass-border-subtle: rgba(255, 255, 255, 0.45);
+    --glass-border-btn: rgba(255, 255, 255, 0.55);
+    --glass-blur: 18px;
+    --glass-blur-heavy: 22px;
+    --glass-shadow: 0 16px 40px rgba(123, 45, 59, 0.12), 0 4px 16px rgba(238, 212, 182, 0.35);
+    --glass-shadow-hover: 0 20px 48px rgba(123, 45, 59, 0.18), 0 6px 20px rgba(238, 212, 182, 0.42);
+    --glass-inset: inset 0 1.5px 1.5px rgba(255, 255, 255, 0.85), inset 0 -1px 1px rgba(255, 255, 255, 0.35);
+
     /* Fonts */
     --font-handwritten: 'Dancing Script', 'Caveat', 'Segoe Script', 'Comic Sans MS', cursive;
     --font-hint: 'Caveat', 'Dancing Script', 'Segoe Script', cursive;
@@ -670,28 +683,44 @@ body {
     margin: 0 auto;
 }
 
-/* Soft, rounded rectangular card matching uploaded color */
+/* Soft, rounded rectangular card matching uploaded color — Premium Clear Glass */
 .romantic-quote-card {
     position: relative;
-    background-color: #F4DFC0;
-    border: 1px solid rgba(215, 180, 145, 0.6);
-    border-radius: 22px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(var(--glass-blur)) saturate(135%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(135%);
+    border: 1px solid var(--glass-border);
+    border-radius: 26px;
     padding: 3.2rem 4rem;
     max-width: 690px;
     width: 92%;
     margin: 0 auto;
     box-shadow: 
-        0 12px 30px rgba(145, 100, 75, 0.15),
-        0 3px 8px rgba(145, 100, 75, 0.08);
+        var(--glass-shadow),
+        var(--glass-inset);
     text-align: center;
-    transition: transform 0.35s ease, box-shadow 0.35s ease;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.34, 1.3, 0.64, 1), box-shadow 0.35s ease;
+}
+
+/* Subtle glass reflection highlight */
+.romantic-quote-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 42%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border-radius: 26px 26px 100px 100px;
+    pointer-events: none;
 }
 
 .romantic-quote-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px) scale(1.01);
     box-shadow: 
-        0 18px 46px rgba(165, 115, 95, 0.12),
-        0 4px 14px rgba(165, 115, 95, 0.06);
+        var(--glass-shadow-hover),
+        var(--glass-inset);
 }
 
 /* Corner decorative shapes matching reference */
@@ -1035,13 +1064,55 @@ body {
     max-width: 290px;
 }
 
-/* Circular numeric buttons 0-9 */
+/* Indicator circles filled & track */
+.indicator-circle {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    border: 1.5px solid #6F8271;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: background-color 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.indicator-circle.filled {
+    background-color: #6F8271;
+    border-color: #6F8271;
+    box-shadow: 0 0 10px rgba(111, 130, 113, 0.45);
+    transform: scale(1.1);
+}
+
+.passkey-indicators-wrap.shake {
+    animation: indicatorsShake 0.45s ease-in-out;
+}
+
+@keyframes indicatorsShake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+/* Keypad 3-column grid matching reference layout */
+.keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem 1.6rem;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    max-width: 290px;
+}
+
+/* Circular numeric buttons 0-9 — Glassmorphism style */
 .keypad-btn {
     width: 68px;
     height: 68px;
     border-radius: 50%;
-    border: 1px solid rgba(220, 195, 175, 0.45);
-    background: #FAF5EE;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(14px) saturate(130%);
+    -webkit-backdrop-filter: blur(14px) saturate(130%);
     color: #1F3624;
     font-family: 'Playfair Display', Georgia, serif;
     font-size: 1.75rem;
@@ -1053,24 +1124,25 @@ body {
     user-select: none;
     -webkit-tap-highlight-color: transparent;
     box-shadow: 
-        0 4px 14px rgba(150, 110, 85, 0.12),
-        0 1px 3px rgba(150, 110, 85, 0.08);
+        0 8px 20px rgba(123, 45, 59, 0.10),
+        inset 0 1px 1px rgba(255, 255, 255, 0.8);
     transition: transform 0.15s ease, background-color 0.2s ease, box-shadow 0.2s ease;
     position: relative;
+    overflow: hidden;
 }
 
 .keypad-btn:hover {
-    transform: translateY(-2px);
-    background: #FFFDF9;
+    transform: translateY(-2px) scale(1.04);
+    background: rgba(255, 255, 255, 0.52);
     box-shadow: 
-        0 6px 18px rgba(150, 110, 85, 0.18),
-        0 2px 5px rgba(150, 110, 85, 0.1);
+        0 12px 26px rgba(123, 45, 59, 0.15),
+        inset 0 1px 1px rgba(255, 255, 255, 0.95);
 }
 
 .keypad-btn:active {
     transform: scale(0.93);
-    background: #F7E4D8;
-    box-shadow: 0 0 20px rgba(225, 150, 130, 0.45);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 0 18px rgba(225, 150, 130, 0.45);
 }
 
 /* 'Clear' button matching reference cursive style */
@@ -1080,15 +1152,17 @@ body {
     font-size: 1.25rem;
     font-weight: 600;
     color: #7B4B27;
-    background: #FAF5EE;
-    border: 1px solid rgba(220, 195, 175, 0.45);
+    background: rgba(255, 255, 255, 0.35);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     box-shadow: 
-        0 4px 14px rgba(150, 110, 85, 0.12),
-        0 1px 3px rgba(150, 110, 85, 0.08);
+        0 8px 20px rgba(123, 45, 59, 0.10),
+        inset 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 
 .keypad-clear-btn:hover {
-    background: #FFFDF9;
+    background: rgba(255, 255, 255, 0.52);
 }
 
 .keypad-spacer {
@@ -1570,23 +1644,29 @@ body {
     width: 100%;
     padding: 0.95rem 1.8rem;
     border-radius: 50px;
-    background: #FAF5EE;
-    border: 1.5px solid rgba(215, 175, 140, 0.65);
-    color: #4A2328;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur)) saturate(135%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(135%);
+    color: #4A1722;
     font-family: var(--font-hint);
     font-size: clamp(1.2rem, 3vw, 1.45rem);
     font-weight: 600;
     cursor: pointer;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
-    box-shadow: 0 4px 14px rgba(150, 110, 85, 0.1);
-    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background-color 0.25s ease;
+    box-shadow: 
+        0 8px 22px rgba(123, 45, 59, 0.10),
+        inset 0 1px 1px rgba(255, 255, 255, 0.85);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background 0.25s ease;
 }
 
 .wants-btn:hover {
     transform: translateY(-2px) scale(1.03);
-    background: #FFFDF9;
-    box-shadow: 0 8px 20px rgba(150, 110, 85, 0.16);
+    background: var(--glass-bg-hover);
+    box-shadow: 
+        0 12px 28px rgba(123, 45, 59, 0.16),
+        inset 0 1px 1px rgba(255, 255, 255, 0.95);
 }
 
 .wants-btn:active {
@@ -1594,15 +1674,21 @@ body {
 }
 
 .wants-btn-highlight {
-    background: linear-gradient(135deg, #F38B9B 0%, #D84B65 100%);
+    background: linear-gradient(135deg, rgba(243, 139, 155, 0.9) 0%, rgba(216, 75, 101, 0.95) 100%);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     color: #FFFFFF;
-    border: none;
-    box-shadow: 0 6px 20px rgba(216, 75, 101, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+    box-shadow: 
+        0 8px 24px rgba(216, 75, 101, 0.38),
+        inset 0 1px 1px rgba(255, 255, 255, 0.75);
 }
 
 .wants-btn-highlight:hover {
-    background: linear-gradient(135deg, #F597A6 0%, #E0546E 100%);
-    box-shadow: 0 10px 26px rgba(216, 75, 101, 0.45);
+    background: linear-gradient(135deg, rgba(245, 151, 166, 0.95) 0%, rgba(224, 84, 110, 0.98) 100%);
+    box-shadow: 
+        0 12px 30px rgba(216, 75, 101, 0.48),
+        inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -1967,12 +2053,13 @@ body {
     max-height: 80dvh;
     width: 100%;
     height: auto;
-    border-radius: 22px;
+    border-radius: 26px;
     background-color: #000;
     box-shadow: 
-        0 18px 45px rgba(120, 80, 55, 0.25),
-        0 4px 14px rgba(120, 80, 55, 0.12);
-    border: 2px solid rgba(215, 175, 140, 0.55);
+        0 20px 48px rgba(123, 45, 59, 0.22),
+        0 4px 18px rgba(238, 212, 182, 0.4),
+        inset 0 1px 1px rgba(255, 255, 255, 0.6);
+    border: 1.5px solid var(--glass-border);
     object-fit: contain;
 }
 
@@ -2004,13 +2091,18 @@ body {
     gap: 0.5rem;
     padding: 0.85rem 2.4rem;
     border-radius: 50px;
-    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    background: linear-gradient(135deg, rgba(37, 211, 102, 0.92) 0%, rgba(18, 140, 126, 0.95) 100%);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     color: #FFFFFF !important;
     font-family: var(--font-hint), sans-serif;
     font-size: clamp(1.2rem, 3.2vw, 1.45rem);
     font-weight: 600;
     text-decoration: none;
-    box-shadow: 0 6px 22px rgba(37, 211, 102, 0.38);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 
+        0 8px 24px rgba(37, 211, 102, 0.38),
+        inset 0 1px 1px rgba(255, 255, 255, 0.65);
     transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
     cursor: pointer;
     user-select: none;
@@ -2019,7 +2111,9 @@ body {
 
 .whatsapp-click-btn:hover {
     transform: translateY(-2px) scale(1.04);
-    box-shadow: 0 10px 28px rgba(37, 211, 102, 0.52);
+    box-shadow: 
+        0 12px 30px rgba(37, 211, 102, 0.52),
+        inset 0 1px 1px rgba(255, 255, 255, 0.85);
     color: #FFFFFF !important;
 }
 
@@ -2030,20 +2124,27 @@ body {
 .video-replay-btn {
     padding: 0.65rem 1.6rem;
     border-radius: 30px;
-    background: #FFFDF9;
-    border: 1.5px solid rgba(215, 175, 140, 0.65);
-    color: #4A2328;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    color: #4A1722;
     font-family: var(--font-hint);
     font-size: 1.15rem;
     font-weight: 600;
     cursor: pointer;
-    box-shadow: 0 4px 12px rgba(150, 110, 85, 0.1);
-    transition: transform 0.2s ease, background 0.2s ease;
+    box-shadow: 
+        0 4px 14px rgba(123, 45, 59, 0.1),
+        inset 0 1px 1px rgba(255, 255, 255, 0.8);
+    transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .video-replay-btn:hover {
     transform: translateY(-2px);
-    background: #FAF5EE;
+    background: var(--glass-bg-hover);
+    box-shadow: 
+        0 8px 20px rgba(123, 45, 59, 0.15),
+        inset 0 1px 1px rgba(255, 255, 255, 0.95);
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -2119,23 +2220,37 @@ body {
     }
 }
 
-/* Aesthetic glass lyrics card */
+/* Aesthetic clear glass lyrics card */
 .lyrics-content-card {
     position: relative;
     z-index: 3;
     max-width: 620px;
     width: 92%;
-    background: rgba(255, 252, 247, 0.78);
-    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid var(--glass-border);
     border-radius: 28px;
     padding: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2.4rem);
     text-align: center;
     box-shadow: 
-        0 20px 45px rgba(123, 45, 59, 0.16),
-        0 4px 15px rgba(238, 212, 182, 0.4),
-        inset 0 1px 1px rgba(255, 255, 255, 0.9);
+        var(--glass-shadow-hover),
+        var(--glass-inset);
+    overflow: hidden;
     transform: translateY(18px) scale(0.96);
     transition: transform 0.8s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+.lyrics-content-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 40%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border-radius: 28px 28px 100px 100px;
+    pointer-events: none;
 }
 
 .lyrics-interlude-overlay.active .lyrics-content-card {
